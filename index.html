@@ -54,11 +54,12 @@
         </form>
       </div>
     </nav>
+    <span id="stad">Prag</span>
     <div>
       <ul id="list"></ul>
     </div>
     <script>
-      todaysWeather("Kiev");
+      todaysWeather(document.getElementById("stad").innerHTML);
     </script>
   </body>
 </html>
