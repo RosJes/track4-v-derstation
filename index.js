@@ -1,6 +1,7 @@
 function todaysWeather() {
-  var name = document.getElementById("name").value;
+  var name = document.getElementById("inputLarge").value;
   document.getElementById("namespan").textContent = name;
+  let cityheader = document.getElementById("Weather");
   console.log("Today's weather in " + name + " is 29 degrees Celsius");
   $(document).ready(function () {
     var api_url = "http://api.openweathermap.org/";
@@ -11,6 +12,9 @@ function todaysWeather() {
       dataType: "json",
       success: function (result) {
         weatherSource = "";
+        let convertCelsius = parseFloat(result.main.temp) - 273.5;
+        convertCelsius = Math.round(convertCelsius);
+        console.log(convertCelsius);
         let ul = document.getElementById("list");
         let text = document.createTextNode(result.weather[0].description);
         let li = document.createElement("li");
@@ -44,11 +48,26 @@ function todaysWeather() {
           weatherSource = "https://img.icons8.com/ios/50/000000/clouds.png";
         }
         img.src = weatherSource;
+        cityheader.innerText = result.name + " " + convertCelsius + "° C ";
         li.appendChild(text);
         ul.appendChild(img);
         ul.appendChild(li);
         console.log(result.weather[0].description);
+
+        let sunrise = result.sys.sunrise;
+        let sunset = result.sys.sunset;
+        let datesunrise = new Date(sunrise * 1000);
+        let datesunset = new Date(sunset * 1000);
+
+        let cardheadersunset = document.getElementById("sunrise");
+        let cardheadersunrise = document.getElementById("sunset");
+        cardheadersunrise.innerText = datesunrise;
+        cardheadersunset.innerText = datesunset;
       },
     });
   });
+}
+
+function foreCast() {
+  console.log("The wather is:");
 }
