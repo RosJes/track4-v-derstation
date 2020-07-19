@@ -54,12 +54,14 @@
         </form>
       </div>
     </nav>
-    <span id="stad">Prag</span>
+
+    <input type="text" name="fname" id="name" />
+
+    <span id="namespan" style="display: none;">Name</span>
+
+    <button id="button" onclick="todaysWeather()">Go</button>
     <div>
       <ul id="list"></ul>
     </div>
-    <script>
-      todaysWeather(document.getElementById("stad").innerHTML);
-    </script>
   </body>
 </html>

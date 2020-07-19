@@ -1,10 +1,12 @@
-function todaysWeather(city) {
-  console.log("Today's weather in " + city + " is 29 degrees Celsius");
+function todaysWeather() {
+  var name = document.getElementById("name").value;
+  document.getElementById("namespan").textContent = name;
+  console.log("Today's weather in " + name + " is 29 degrees Celsius");
   $(document).ready(function () {
     var api_url = "http://api.openweathermap.org/";
     var key = "936f2e7c80c5a35d539529f46f2c798b";
     $.ajax({
-      url: api_url + "data/2.5/weather?q=" + city + "&appid=" + key,
+      url: api_url + "data/2.5/weather?q=" + name + "&appid=" + key,
       type: "GET",
       dataType: "json",
       success: function (result) {
