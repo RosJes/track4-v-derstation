@@ -59,8 +59,8 @@ function todaysWeather() {
         let datesunrise = new Date(sunrise * 1000);
         let datesunset = new Date(sunset * 1000);
 
-        let cardheadersunset = document.getElementById("sunrise");
-        let cardheadersunrise = document.getElementById("sunset");
+        let cardheadersunset = document.getElementById("sunset");
+        let cardheadersunrise = document.getElementById("sunrise");
         cardheadersunrise.innerText = datesunrise;
         cardheadersunset.innerText = datesunset;
       },
@@ -70,4 +70,8 @@ function todaysWeather() {
 
 function foreCast() {
   console.log("The wather is:");
+}
+function changetoSunset() {
+  var sunset = document.getElementsByClassName("blocks");
+  sunset;
 }

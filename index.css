@@ -5,10 +5,14 @@
 }
 .blocks {
   padding-left: 100px;
-  padding-right: 450px;
+  padding-right: 350px;
   float: right;
+  display: none;
 }
 .second-block {
-  padding-left: 150px;
+  padding-left: 225px;
   float: left;
+}
+#humidity {
+  float: right;
 }
