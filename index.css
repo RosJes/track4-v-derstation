@@ -4,15 +4,18 @@
   padding-right: 500px;
 }
 .blocks {
-  padding-left: 100px;
+  padding-top: 25px;
+  padding-left: 15px;
   padding-right: 350px;
   float: right;
-  display: none;
+  visibility: hidden;
 }
 .second-block {
+  padding-top: 25px;
   padding-left: 225px;
   float: left;
+  /* display: none; */
 }
 #humidity {
-  float: right;
+  float: left;
 }

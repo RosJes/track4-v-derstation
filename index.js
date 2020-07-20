@@ -2,7 +2,6 @@ function todaysWeather() {
   var name = document.getElementById("inputLarge").value;
   document.getElementById("namespan").textContent = name;
   let cityheader = document.getElementById("Weather");
-  console.log("Today's weather in " + name + " is 29 degrees Celsius");
   $(document).ready(function () {
     var api_url = "http://api.openweathermap.org/";
     var key = "936f2e7c80c5a35d539529f46f2c798b";
@@ -11,6 +10,8 @@ function todaysWeather() {
       type: "GET",
       dataType: "json",
       success: function (result) {
+        console.log(result.id);
+        historyCast("60.99", "30.9", "1594810397");
         weatherSource = "";
         let convertCelsius = parseFloat(result.main.temp) - 273.5;
         convertCelsius = Math.round(convertCelsius);
@@ -68,10 +69,49 @@ function todaysWeather() {
   });
 }
 
-function foreCast() {
-  console.log("The wather is:");
+function historyCast(lat, lon, timestamp) {
+  console.log("The weather is:");
+
+  $("body").ready(function () {
+    var api_url = "http://api.openweathermap.org";
+    var key = "936f2e7c80c5a35d539529f46f2c798b";
+    let str = "/data/2.5/onecall/timemachine?";
+    let url =
+      api_url +
+      str +
+      "lat=" +
+      lat +
+      "&" +
+      "lon=" +
+      lon +
+      "&" +
+      "dt=" +
+      timestamp +
+      "&appid=" +
+      key;
+    $.ajax({
+      url: url,
+      type: "GET",
+      success: function (result) {
+        console.log(result);
+        let ul = document.getElementById("list");
+
+        for (var i = 0; i < result.length; i++) {
+          let li = document.createElement("li");
+          let img = document.createElement("img");
+
+          li.innerHTML = result[i].title + "<br></br>";
+          img.src = result[i].thumbnailUrl;
+
+          li.appendChild(img);
+          ul.appendChild(li);
+        }
+      },
+    });
+  });
 }
+
 function changetoSunset() {
   var sunset = document.getElementsByClassName("blocks");
-  sunset;
+  console.log(sunset);
 }
