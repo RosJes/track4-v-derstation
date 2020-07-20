@@ -1,7 +1,15 @@
+let counter = 0;
 function todaysWeather() {
   var name = document.getElementById("inputLarge").value;
-  document.getElementById("namespan").textContent = name;
+  var span = document.getElementById("namespan");
+  span.textContent = name;
+  let poser = document.getElementById("poser");
+  let Cast = document.getElementById("HistoryCast");
+  poser.style.display = "none";
+  Cast.style.display = "inline";
+
   let cityheader = document.getElementById("Weather");
+  let waetherli = document.getElementById("weatherli");
   $(document).ready(function () {
     var api_url = "http://api.openweathermap.org/";
     var key = "936f2e7c80c5a35d539529f46f2c798b";
@@ -10,8 +18,9 @@ function todaysWeather() {
       type: "GET",
       dataType: "json",
       success: function (result) {
-        console.log(result.id);
-        historyCast("60.99", "30.9", "1594810397"); //hårdkodat, gör en timestamp konverterare, ret lon,lat värden
+        console.log(result);
+        historyCast(result.coord.lat, result.coord.lon, "1595155997"); //gör klart konverterar metoden
+        //hårdkodat, gör en timestamp konverterare, ret lon,lat värden
         weatherSource = "";
         let convertCelsius = parseFloat(result.main.temp) - 273.5;
         convertCelsius = Math.round(convertCelsius);
@@ -19,41 +28,52 @@ function todaysWeather() {
         let text = document.createTextNode(result.weather[0].description);
         let li = document.createElement("li");
         let img = document.createElement("img");
-        if (result.weather[0].description.includes("rain")) {
-          weatherSource =
-            "https://img.icons8.com/ios/50/000000/torrential-rain.png";
-        }
-        if (result.weather[0].description == "light rain") {
-          weatherSource = "https://img.icons8.com/ios/50/000000/light-rain.png";
-        }
-        if (result.weather[0].description == "shower rain") {
-          weatherSource =
-            "https://img.icons8.com/ios/50/000000/intense-rain.png";
-        }
-        if (result.weather[0].description == "thunderstorm") {
-          weatherSource = "https://img.icons8.com/ios/50/000000/storm.png";
-        }
-        if (result.weather[0].description == "clear sky") {
-          weatherSource = "https://img.icons8.com/ios/50/000000/sun.png";
-        }
-        if (result.weather[0].description == "partly clouds") {
-          weatherSource =
-            "https://img.icons8.com/ios/50/000000/partly-cloudy-day.png";
-        }
+        if (name != null) {
+          if (result.weather[0].description.includes("rain")) {
+            weatherSource =
+              "https://img.icons8.com/ios/50/000000/torrential-rain.png";
+          }
+          if (result.weather[0].description == "light rain") {
+            weatherSource =
+              "https://img.icons8.com/ios/50/000000/light-rain.png";
+          }
+          if (result.weather[0].description == "shower rain") {
+            weatherSource =
+              "https://img.icons8.com/ios/50/000000/intense-rain.png";
+          }
+          if (result.weather[0].description == "thunderstorm") {
+            weatherSource = "https://img.icons8.com/ios/50/000000/storm.png";
+          }
+          if (result.weather[0].description == "clear sky") {
+            weatherSource = "https://img.icons8.com/ios/50/000000/sun.png";
+          }
+          if (result.weather[0].description == "partly clouds") {
+            weatherSource =
+              "https://img.icons8.com/ios/50/000000/partly-cloudy-day.png";
+          }
 
-        if (result.weather[0].description.includes("snow")) {
-          weatherSource = "https://img.icons8.com/ios/50/000000/snow.png";
+          if (result.weather[0].description.includes("snow")) {
+            weatherSource = "https://img.icons8.com/ios/50/000000/snow.png";
+          }
+          if (result.weather[0].description.includes("cloud")) {
+            weatherSource = "https://img.icons8.com/ios/50/000000/clouds.png";
+          }
+          img.src = weatherSource;
+          cityheader.innerText = result.name + " " + convertCelsius + "° C ";
+          li.appendChild(text);
+          ul.appendChild(img);
+          ul.appendChild(li);
         }
-        if (result.weather[0].description.includes("cloud")) {
-          weatherSource = "https://img.icons8.com/ios/50/000000/clouds.png";
-        }
-        img.src = weatherSource;
-        cityheader.innerText = result.name + " " + convertCelsius + "° C ";
-        li.appendChild(text);
-        ul.appendChild(img);
-        ul.appendChild(li);
         console.log(result.weather[0].description);
-
+        counter += 1;
+        var x = document.getElementById("commitbtn");
+        if (span.length != 0) {
+          x.style.display = "none";
+          span.innerText = " ";
+        }
+        if (span.length == 0) {
+          x.style.display = "inline";
+        }
         let sunrise = result.sys.sunrise;
         let sunset = result.sys.sunset;
         let datesunrise = new Date(sunrise * 1000);
@@ -67,7 +87,9 @@ function todaysWeather() {
     });
   });
 }
-
+function TimestamptoDate(year, month, day, hours, minutes, seconds) {
+  console.log("AM TO BECOME A TIMESTAMP CONVERTER");
+}
 function historyCast(lat, lon, timestamp) {
   console.log("The weather is:");
 
@@ -94,9 +116,10 @@ function historyCast(lat, lon, timestamp) {
       success: function (result) {
         console.log(result);
         let ul = document.getElementById("HistoryCast");
-
-        for (var i = 0; i < result.hourly.length; i++) {
+        let yesterdayweather = document.getElementById("Yesterdayweather");
+        for (var i = new Date().getUTCHours(); i < result.hourly.length; i++) {
           let li = document.createElement("li");
+          let img = document.createElement("img");
           let date = result.hourly[i].dt;
           let unix = new Date(date * 1000);
           let temp = parseFloat(result.hourly[i].temp) - 273;

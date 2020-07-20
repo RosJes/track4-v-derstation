@@ -69,6 +69,7 @@
           id="inputLarge"
         />
         <button
+        id='commitbtn'
           type="button"
           class="btn btn-primary btn-lg btn-block"
           onclick="todaysWeather()"
@@ -78,17 +79,19 @@
       </div>
       <span id="namespan" style="display: none;">Name</span>
       <div class="list-group" id="humidity">
-        <a href="#" class="list-group-item list-group-item-action active">
+        <a href="#" class="list-group-item list-group-item-action active" id="Pressure">
         Discover Pressure:
         </a>
-        <a href="#" class="list-group-item list-group-item-action">Discover Humidity:
+        <a href="#" class="list-group-item list-group-item-action" id="humid">Discover Humidity:
         </a>
-        <a href="#" class="list-group-item list-group-item-action disabled"> Feels like:
+        <a href="#" class="list-group-item list-group-item-action disabled" id="Feel"> Feels like:
         </a>
       </div>
-      <div >
+      <div id=weatherli >
           <h1 id="Weather"></h1>
-        <ul id="list"></ul>
+        <ul id="list">
+            <li id='poser'><img src="https://img.icons8.com/dotty/100/000000/umbrella.png"/></li>
+        </ul>
       </div>
     </div>
     <div class="blocks">
@@ -117,6 +120,14 @@
     </div>
   </div>
 </div>
-<ul id='HistoryCast'></ul>
+<div class="list-group" id="HistoryCast">
+    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 id='Yesterdayweather'class="mb-1">Weather</h5>
+        <small>Yesterday</small>
+      </div>
+<!-- <ul id='HistoryCast'>
+    <li><h1>Yesterday's Weather</h1></li>
+</ul> -->
   </body>
 </html>

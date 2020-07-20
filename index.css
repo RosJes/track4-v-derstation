@@ -8,6 +8,7 @@
   padding-left: 15px;
   padding-right: 350px;
   float: right;
+  /* display: none; */
   visibility: hidden;
 }
 .second-block {
@@ -18,8 +19,11 @@
 }
 #humidity {
   float: left;
+  /* display: none; */
 }
 #HistoryCast {
-  padding-right: 150px;
-  float: right;
+  float: left;
+  padding-right: 200px;
+  padding-left: 225px;
+  display: none;
 }
