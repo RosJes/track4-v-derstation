@@ -11,11 +11,10 @@ function todaysWeather() {
       dataType: "json",
       success: function (result) {
         console.log(result.id);
-        historyCast("60.99", "30.9", "1594810397");
+        historyCast("60.99", "30.9", "1594810397"); //hårdkodat, gör en timestamp konverterare, ret lon,lat värden
         weatherSource = "";
         let convertCelsius = parseFloat(result.main.temp) - 273.5;
         convertCelsius = Math.round(convertCelsius);
-        console.log(convertCelsius);
         let ul = document.getElementById("list");
         let text = document.createTextNode(result.weather[0].description);
         let li = document.createElement("li");
@@ -94,16 +93,15 @@ function historyCast(lat, lon, timestamp) {
       type: "GET",
       success: function (result) {
         console.log(result);
-        let ul = document.getElementById("list");
+        let ul = document.getElementById("HistoryCast");
 
-        for (var i = 0; i < result.length; i++) {
+        for (var i = 0; i < result.hourly.length; i++) {
           let li = document.createElement("li");
-          let img = document.createElement("img");
-
-          li.innerHTML = result[i].title + "<br></br>";
-          img.src = result[i].thumbnailUrl;
-
-          li.appendChild(img);
+          let date = result.hourly[i].dt;
+          let unix = new Date(date * 1000);
+          let temp = parseFloat(result.hourly[i].temp) - 273;
+          li.innerHTML = unix + ":" + Math.round(temp) + "° C";
+          ("<br></br>");
           ul.appendChild(li);
         }
       },

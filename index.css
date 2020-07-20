@@ -19,3 +19,7 @@
 #humidity {
   float: left;
 }
+#HistoryCast {
+  padding-right: 150px;
+  float: right;
+}
