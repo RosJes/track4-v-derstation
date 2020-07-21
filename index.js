@@ -180,9 +180,9 @@ function getYesterday(lat, lon, timestamp) {
         let img = document.createElement("img");
         let date = result.hourly[0].dt;
         let unix = new Date(date * 1000);
-        let temp = parseFloat(result.hourly[0].temp) - 273;
+        let temp = parseFloat(result.hourly[0].temp) - 273; //hårdkodat
         ("<br></br>");
-        ul.innerText = temp;
+        ul.innerText = temp + " " + unix;
       },
     });
   });
