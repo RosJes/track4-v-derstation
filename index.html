@@ -55,19 +55,39 @@
         </form>
       </div>
     </nav>
-    <div id="important-city"class="card text-white bg-info mb-3" style="max-width: 20rem;">
-      <div class="card-header">Header</div>
-      <div class="card-body">
-        <h4 class="card-title">Info card title</h4>
-        <p class="card-text" id="important-city-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <div id="important-city"class="card text-white bg-info mb-3" style="max-width: 20rem;">
+          <div class="card-header">Stockholm
+            <img src="https://img.icons8.com/ios/50/000000/partly-cloudy-night.png"/>
+          </div>
+          <div class="card-body">
+            <h4 class="card-title"> Stockholm 23° C 11:00 pm</h4>
+            <p class="card-text" id="important-city-text">
+              <img src="https://img.icons8.com/color/48/000000/cloud-lighting.png"/>
+            Thunder and moderate rain
+            </p>
+          </div>
+        </div>
+        <div id="important-city2"class="card text-white bg-info mb-3" style="max-width: 20rem;">
+          <div class="card-header">Linköping</div>
+          <div class="card-body">
+            <h4 class="card-title">Info card title</h4>
+            <p class="card-text" id="important-city-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          </div>
+        </div>
+      </div>
+      <div id="important-city3"class="card text-white bg-info mb-3" style="max-width: 20rem;">
+        <div class="card-header">Uppsala</div>
+        <div class="card-body">
+          <h4 class="card-title">Info card title</h4>
+          <p class="card-text" id="important-city-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
       </div>
     </div>
-    <div class="Input-form">
-      <div class="form-group">
-        <label class="col-form-label col-form-label-lg" for="inputLarge"
-          >Discover Today's weather in any city!</label
-        >
-
+      <div class="Input-form">
+        <div class="form-group">
+          <label class="col-form-label col-form-label-lg" for="inputLarge"
+            >Discover Today's weather in any city!</label
+          >
         <input
           class="form-control form-control-lg"
           type="text"
@@ -83,7 +103,6 @@
           Click me!
         </button>
         
-      </div>
       <div id=weatherli >
         <h1 id="Weather"></h1>
       <ul id="list">
@@ -101,20 +120,7 @@
         </a>
       </div>
       <span id="namespan" style="display: none;">Name</span>
-    <div class="blocks" id="sunsetcard">
-      <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
-        <div class="card-header" >
-            <img src="https://img.icons8.com/color/50/000000/sunset.png"/>
-        </div>
-        <div class="card-body">
-          <h4 class="card-title">When does the sun set?</h4>
-          <p class="card-text"id="sunset"placeholder="When does the sun set?">
-          </p>
-        </div>
-        <button type="button" class="btn btn-outline-secondary"onclick="changetoSunset()">turn on</button>
-      </div>
-    </div>
-</div>
+    
 <div class="second-block" id='sunrisecard'>
 <div class="card border-primary mb-3" style="max-width: 20rem;">
     <div class="card-header" >
@@ -127,3 +133,19 @@
     <button type="button"onclick="changetoSunset()" class="btn btn-outline-primary">turn off</button>
   </div>
 </div>
+
+<div class="blocks" id="sunsetcard">
+  <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
+    <div class="card-header" >
+        <img src="https://img.icons8.com/color/50/000000/sunset.png"/>
+    </div>
+    <div class="card-body">
+      <h4 class="card-title">When does the sun set?</h4>
+      <p class="card-text"id="sunset"placeholder="When does the sun set?">
+      </p>
+    </div>
+    <button type="button" class="btn btn-outline-secondary"onclick="changetoSunset()">turn on</button>
+  </div>
+</div>
+</div>
+

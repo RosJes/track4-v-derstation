@@ -1,30 +1,25 @@
 .Input-form {
   padding-left: 125px;
   padding-top: 25px;
-  padding-right: 950px;
+  padding-right: 650px;
 }
 .blocks {
-  padding-left: 125px;
   padding-top: 25px;
-  padding-right: 500px;
   float: left;
   display: none;
 }
 .second-block {
-  padding-left: 125px;
   padding-top: 25px;
-  padding-right: 500px;
   float: left;
   display: inline;
 }
-#humidity {
-  padding-left: 125px;
-  padding-right: 500px;
-  /* float: left; */
-}
+
 #important-city {
-  float: right;
-  padding-right: 75px;
+  position: relative;
+  float: left;
+}
+#important-city2 {
+  float: left;
 }
 
 .list-group.a {
