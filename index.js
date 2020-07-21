@@ -1,3 +1,4 @@
+let yesterday = new Date(new Date().setDate(new Date().getDate() - 1));
 let counter = 0;
 function todaysWeather() {
   var name = document.getElementById("inputLarge").value;
@@ -19,7 +20,11 @@ function todaysWeather() {
       dataType: "json",
       success: function (result) {
         console.log(result);
-        historyCast(result.coord.lat, result.coord.lon, "1595155997"); //gör klart konverterar metoden
+        historyCast(
+          result.coord.lat,
+          result.coord.lon,
+          toTimestamp(yesterday.toString())
+        ); //gör klart konverterar metoden
         //hårdkodat, gör en timestamp konverterare, ret lon,lat värden
         weatherSource = "";
         let convertCelsius = parseFloat(result.main.temp) - 273.5;
@@ -87,8 +92,9 @@ function todaysWeather() {
     });
   });
 }
-function TimestamptoDate(year, month, day, hours, minutes, seconds) {
-  console.log("AM TO BECOME A TIMESTAMP CONVERTER");
+function toTimestamp(strDate) {
+  var datum = Date.parse(strDate);
+  return datum / 1000;
 }
 function historyCast(lat, lon, timestamp) {
   console.log("The weather is:");
