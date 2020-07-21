@@ -1,7 +1,7 @@
 .Input-form {
-  padding-left: 125px;
+  /* padding-left: 125px; */
   padding-top: 25px;
-  padding-right: 650px;
+  padding-right: 450px;
 }
 .blocks {
   padding-top: 25px;
@@ -27,9 +27,10 @@
 }
 
 #HistoryCast {
-  padding-left: 125px;
+  /* padding-left: 125px;
+  
+  padding-right: 500px; */
   padding-top: 25px;
-  padding-right: 500px;
   float: left;
   /* display: inline-block; */
 }
