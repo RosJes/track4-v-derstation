@@ -27,8 +27,5 @@
   padding-top: 25px;
   padding-right: 500px;
   float: left;
-  display: none;
+  /* display: inline-block; */
 }
-/* #weatherli {
-  float: right;
-} */

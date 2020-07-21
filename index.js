@@ -1,13 +1,12 @@
 let yesterday = new Date(new Date().setDate(new Date().getDate() - 1));
+historyCast("59.33", "18.06", toTimestamp(yesterday.toString()));
 let counter = 0;
+// poser.style.display = "none";
 function todaysWeather() {
   var name = document.getElementById("inputLarge").value;
   var span = document.getElementById("namespan");
   span.textContent = name;
   // let poser = document.getElementById("poser");
-  let Cast = document.getElementById("HistoryCast");
-  // poser.style.display = "none";
-  Cast.style.display = "inline";
   let humid = document.getElementById("humid");
   let pressure = document.getElementById("Pressure");
   let feel = document.getElementById("Feel");
@@ -22,11 +21,11 @@ function todaysWeather() {
       dataType: "json",
       success: function (result) {
         console.log(result);
-        historyCast(
-          result.coord.lat,
-          result.coord.lon,
-          toTimestamp(yesterday.toString())
-        );
+        // historyCast(
+        //   result.coord.lat,
+        //   result.coord.lon,
+        //   toTimestamp(yesterday.toString())
+        // );
         weatherSource = "";
         let ul = document.getElementById("list");
         let text = document.createTextNode(result.weather[0].description);
@@ -61,6 +60,12 @@ function todaysWeather() {
           }
           if (result.weather[0].description.includes("cloud")) {
             weatherSource = "https://img.icons8.com/ios/50/000000/clouds.png";
+          }
+          if (
+            result.weather[0].description.includes("smoke") ||
+            result.weather[0].description.includes("haze")
+          ) {
+            weatherSource = "https://img.icons8.com/ios/48/000000/fog-day.png";
           }
           img.src = weatherSource;
           cityheader.innerText =
@@ -126,6 +131,7 @@ function historyCast(lat, lon, timestamp) {
         console.log(result);
         let ul = document.getElementById("HistoryCast");
         let yesterdayweather = document.getElementById("Yesterdayweather");
+        yesterdayweather.innerText = "Timezone: " + result.timezone;
         for (var i = new Date().getUTCHours(); i < result.hourly.length; i++) {
           let li = document.createElement("li");
           let img = document.createElement("img");
@@ -153,4 +159,37 @@ function changetoSunset() {
     sunrisecard.style.display = "inline";
   }
   counter++;
+}
+function Chart() {
+  var chart = JSC.chart("chartDiv", {
+    debug: true,
+    type: "line",
+    title_label_text: "Line Series Types",
+    legend_position: "inside bottom right",
+    toolbar_items: {
+      "Line Type": {
+        type: "select",
+        label_style_fontSize: 13,
+        margin: 5,
+        items: "Line,Step,Spline",
+        events_change: function (val) {
+          chart.series().options({ type: val });
+        },
+      },
+    },
+    xAxis: { scale_type: "time" },
+    series: [
+      {
+        name: "Purchases",
+        points: [
+          ["1/1/2020", 29.9],
+          ["1/2/2020", 71.5],
+          ["1/3/2020", 106.4],
+          ["1/6/2020", 129.2],
+          ["1/7/2020", 144.0],
+          ["1/8/2020", 176.0],
+        ],
+      },
+    ],
+  });
 }
