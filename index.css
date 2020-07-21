@@ -1,7 +1,7 @@
 .Input-form {
   padding-left: 125px;
   padding-top: 25px;
-  padding-right: 500px;
+  padding-right: 950px;
 }
 .blocks {
   padding-left: 125px;
@@ -20,8 +20,17 @@
 #humidity {
   padding-left: 125px;
   padding-right: 500px;
-  float: left;
+  /* float: left; */
 }
+#important-city {
+  float: right;
+  padding-right: 75px;
+}
+
+.list-group.a {
+  display: inline-block;
+}
+
 #HistoryCast {
   padding-left: 125px;
   padding-top: 25px;

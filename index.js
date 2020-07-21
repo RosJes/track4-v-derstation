@@ -31,6 +31,11 @@ function todaysWeather() {
         let text = document.createTextNode(result.weather[0].description);
         let li = document.createElement("li");
         let img = document.createElement("img");
+        getYesterday(
+          result.coord.lat,
+          result.coord.lon,
+          toTimestamp(yesterday.toString())
+        );
         if (span.length != 0) {
           if (result.weather[0].description.includes("rain")) {
             weatherSource =
@@ -142,6 +147,42 @@ function historyCast(lat, lon, timestamp) {
           ("<br></br>");
           ul.appendChild(li);
         }
+      },
+    });
+  });
+}
+function getYesterday(lat, lon, timestamp) {
+  $("body").ready(function () {
+    var api_url = "http://api.openweathermap.org";
+    var key = "936f2e7c80c5a35d539529f46f2c798b";
+    let str = "/data/2.5/onecall/timemachine?";
+    let url =
+      api_url +
+      str +
+      "lat=" +
+      lat +
+      "&" +
+      "lon=" +
+      lon +
+      "&" +
+      "dt=" +
+      timestamp +
+      "&appid=" +
+      key;
+    $.ajax({
+      url: url,
+      type: "GET",
+      success: function (result) {
+        console.log(result);
+        let ul = document.getElementById("important-city-text");
+        // let yesterdayweather = document.getElementById("Yesterdayweather");
+        // yesterdayweather.innerText = "Timezone: " + result.timezone;
+        let img = document.createElement("img");
+        let date = result.hourly[0].dt;
+        let unix = new Date(date * 1000);
+        let temp = parseFloat(result.hourly[0].temp) - 273;
+        ("<br></br>");
+        ul.innerText = temp;
       },
     });
   });
