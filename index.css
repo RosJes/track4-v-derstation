@@ -1,29 +1,34 @@
 .Input-form {
-  padding-left: 225px;
+  padding-left: 125px;
   padding-top: 25px;
   padding-right: 500px;
 }
 .blocks {
+  padding-left: 125px;
   padding-top: 25px;
-  padding-left: 15px;
-  padding-right: 350px;
-  float: right;
-  /* display: none; */
-  visibility: hidden;
-}
-.second-block {
-  padding-top: 25px;
-  padding-left: 225px;
+  padding-right: 500px;
   float: left;
-  /* display: none; */
-}
-#humidity {
-  float: left;
-  /* display: none; */
-}
-#HistoryCast {
-  float: left;
-  padding-right: 200px;
-  padding-left: 225px;
   display: none;
 }
+.second-block {
+  padding-left: 125px;
+  padding-top: 25px;
+  padding-right: 500px;
+  float: left;
+  display: inline;
+}
+#humidity {
+  padding-left: 125px;
+  padding-right: 500px;
+  float: left;
+}
+#HistoryCast {
+  padding-left: 125px;
+  padding-top: 25px;
+  padding-right: 500px;
+  float: left;
+  display: none;
+}
+/* #weatherli {
+  float: right;
+} */

@@ -55,7 +55,6 @@
         </form>
       </div>
     </nav>
-    
     <div class="Input-form">
       <div class="form-group">
         <label class="col-form-label col-form-label-lg" for="inputLarge"
@@ -77,7 +76,13 @@
           Click me!
         </button>
       </div>
-      <span id="namespan" style="display: none;">Name</span>
+      <div id=weatherli >
+        <h1 id="Weather"></h1>
+      <ul id="list">
+          <!-- <li id='poser'><img src="https://img.icons8.com/color/96/000000/barometer.png"/></li> -->
+      </ul>
+      </div>
+      </div>
       <div class="list-group" id="humidity">
         <a href="#" class="list-group-item list-group-item-action active" id="Pressure">
         Discover Pressure:
@@ -87,14 +92,8 @@
         <a href="#" class="list-group-item list-group-item-action disabled" id="Feel"> Feels like:
         </a>
       </div>
-      <div id=weatherli >
-          <h1 id="Weather"></h1>
-        <ul id="list">
-            <li id='poser'><img src="https://img.icons8.com/dotty/100/000000/umbrella.png"/></li>
-        </ul>
-      </div>
-    </div>
-    <div class="blocks">
+      <span id="namespan" style="display: none;">Name</span>
+    <div class="blocks" id="sunsetcard">
       <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
         <div class="card-header" >
             <img src="https://img.icons8.com/color/50/000000/sunset.png"/>
@@ -102,14 +101,13 @@
         <div class="card-body">
           <h4 class="card-title">When does the sun set?</h4>
           <p class="card-text"id="sunset"placeholder="When does the sun set?">
-            
           </p>
         </div>
+        <button onclick="changetoSunset()">turn on</button>
       </div>
     </div>
 </div>
-<!-- <button onclick="changetoSunset()">Change</button> -->
-<div class="second-block">
+<div class="second-block" id='sunrisecard'>
 <div class="card border-primary mb-3" style="max-width: 20rem;">
     <div class="card-header" >
         <img src="https://img.icons8.com/color/50/000000/sunrise.png"/>
@@ -118,16 +116,17 @@
       <h4 class="card-title">When does the sun rise?</h4>
       <p class="card-text"id="sunrise"placeholder= "When does the sun rise?"></p>
     </div>
+    <button onclick="changetoSunset()">turn of</button>
   </div>
 </div>
+
+      
+    
 <div class="list-group" id="HistoryCast">
     <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
       <div class="d-flex w-100 justify-content-between">
         <h5 id='Yesterdayweather'class="mb-1">Weather</h5>
         <small>Yesterday</small>
       </div>
-<!-- <ul id='HistoryCast'>
-    <li><h1>Yesterday's Weather</h1></li>
-</ul> -->
   </body>
 </html>

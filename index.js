@@ -4,11 +4,13 @@ function todaysWeather() {
   var name = document.getElementById("inputLarge").value;
   var span = document.getElementById("namespan");
   span.textContent = name;
-  let poser = document.getElementById("poser");
+  // let poser = document.getElementById("poser");
   let Cast = document.getElementById("HistoryCast");
-  poser.style.display = "none";
+  // poser.style.display = "none";
   Cast.style.display = "inline";
-
+  let humid = document.getElementById("humid");
+  let pressure = document.getElementById("Pressure");
+  let feel = document.getElementById("Feel");
   let cityheader = document.getElementById("Weather");
   let waetherli = document.getElementById("weatherli");
   $(document).ready(function () {
@@ -24,16 +26,13 @@ function todaysWeather() {
           result.coord.lat,
           result.coord.lon,
           toTimestamp(yesterday.toString())
-        ); //gör klart konverterar metoden
-        //hårdkodat, gör en timestamp konverterare, ret lon,lat värden
+        );
         weatherSource = "";
-        let convertCelsius = parseFloat(result.main.temp) - 273.5;
-        convertCelsius = Math.round(convertCelsius);
         let ul = document.getElementById("list");
         let text = document.createTextNode(result.weather[0].description);
         let li = document.createElement("li");
         let img = document.createElement("img");
-        if (name != null) {
+        if (span.length != 0) {
           if (result.weather[0].description.includes("rain")) {
             weatherSource =
               "https://img.icons8.com/ios/50/000000/torrential-rain.png";
@@ -64,20 +63,20 @@ function todaysWeather() {
             weatherSource = "https://img.icons8.com/ios/50/000000/clouds.png";
           }
           img.src = weatherSource;
-          cityheader.innerText = result.name + " " + convertCelsius + "° C ";
+          cityheader.innerText =
+            result.name + " " + convertToCelsius(result.main.temp) + "° C ";
           li.appendChild(text);
           ul.appendChild(img);
           ul.appendChild(li);
+          pressure.innerText = "Pressure: " + result.main.pressure;
+          feel.innerText =
+            "Feels like: " + convertToCelsius(result.main.feels_like) + "° C";
+          humid.innerText = "Humidity: " + result.main.humidity;
         }
-        console.log(result.weather[0].description);
-        counter += 1;
-        var x = document.getElementById("commitbtn");
         if (span.length != 0) {
-          x.style.display = "none";
+          let commitbtn = document.getElementById("commitbtn");
+          commitbtn.style.display = "none";
           span.innerText = " ";
-        }
-        if (span.length == 0) {
-          x.style.display = "inline";
         }
         let sunrise = result.sys.sunrise;
         let sunset = result.sys.sunset;
@@ -95,6 +94,10 @@ function todaysWeather() {
 function toTimestamp(strDate) {
   var datum = Date.parse(strDate);
   return datum / 1000;
+}
+function convertToCelsius(temp) {
+  let convertCelsius = parseFloat(temp) - 273.5;
+  return (convertCelsius = Math.round(convertCelsius));
 }
 function historyCast(lat, lon, timestamp) {
   console.log("The weather is:");
@@ -137,8 +140,17 @@ function historyCast(lat, lon, timestamp) {
     });
   });
 }
-
+//BUNDET TILL KNAPP
 function changetoSunset() {
-  var sunset = document.getElementsByClassName("blocks");
-  console.log(sunset);
+  let sunsetcard = document.getElementById("sunsetcard");
+  let sunrisecard = document.getElementById("sunrisecard");
+  console.log("button clicked");
+  if (counter % 2 == 0) {
+    sunsetcard.style.display = "inline";
+    sunrisecard.style.display = "none";
+  } else {
+    sunsetcard.style.display = "none";
+    sunrisecard.style.display = "inline";
+  }
+  counter++;
 }
