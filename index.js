@@ -28,12 +28,7 @@ function todaysWeather() {
       success: function (result) {
         console.log(result);
         //text till lastest spalten
-        headerimg.src = DayandNightIcon(
-          today.getHours(),
-          result.sys.sunset,
-          result.sys.sunrise
-        );
-
+        headerimg.src = DayandNightIcon(today.getHours());
         latestheader.innerText =
           result.name +
           " " +
@@ -45,12 +40,12 @@ function todaysWeather() {
         weatherReport.innerHTML = result.weather[0].description;
         imgtag.src = setLatestIcon(result.weather[0].description);
         lastestWeatherimg.appendChild(imgtag);
-        console.log(imgtag.src);
-        // getYesterday(
-        //   result.coord.lat,
-        //   result.coord.lon,
-        //   toTimestamp(yesterday.toString())
-        // );
+        getYesterday(
+          result.name,
+          result.coord.lat,
+          result.coord.lon,
+          toTimestamp(yesterday.toString())
+        );
         let ul = document.getElementById("list");
         let text = document.createTextNode(result.weather[0].description);
         let li = document.createElement("li");
@@ -73,15 +68,15 @@ function todaysWeather() {
           commitbtn.style.display = "none";
           span.innerText = " ";
         }
-        let sunrise = result.sys.sunrise;
-        let sunset = result.sys.sunset;
-        let datesunrise = new Date(sunrise * 1000);
-        let datesunset = new Date(sunset * 1000);
+        // let sunrise = result.sys.sunrise;
+        // let sunset = result.sys.sunset;
+        // let datesunrise = new Date(sunrise * 1000);
+        // let datesunset = new Date(sunset * 1000);
 
-        let cardheadersunset = document.getElementById("sunset");
-        let cardheadersunrise = document.getElementById("sunrise");
-        cardheadersunrise.innerText = datesunrise;
-        cardheadersunset.innerText = datesunset;
+        // let cardheadersunset = document.getElementById("sunset");
+        // let cardheadersunrise = document.getElementById("sunrise");
+        // cardheadersunrise.innerText = datesunrise;
+        // cardheadersunset.innerText = datesunset;
       },
     });
   });
@@ -92,14 +87,14 @@ function toTimestamp(strDate) {
   return datum / 1000;
 }
 //night or day icons
-function DayandNightIcon(time, sunset, sunrise) {
+function DayandNightIcon(time) {
   console.log("I am about to be a night or day icon");
   let weatherSource = "";
-  if (time == sunrise || time <= 19) {
+  if (time <= 19) {
     weatherSource =
       "https://img.icons8.com/ios/48/000000/partly-cloudy-day.png";
   }
-  if (time == sunset || time >= 19) {
+  if (time >= 19) {
     weatherSource =
       "https://img.icons8.com/ios/48/000000/partly-cloudy-night.png";
   }
@@ -218,8 +213,8 @@ function historyCast(lat, lon, timestamp) {
           let img = document.createElement("img");
           let date = result.hourly[i].dt;
           let unix = new Date(date * 1000);
-          let temp = parseFloat(result.hourly[i].temp) - 273;
-          li.innerHTML = unix + ":" + Math.round(temp) + "° C";
+          let temp = convertToCelsius(result.hourly[i].temp);
+          li.innerHTML = temp + "° C";
           ("<br></br>");
           ul.appendChild(li);
         }
@@ -228,41 +223,51 @@ function historyCast(lat, lon, timestamp) {
   });
 }
 //här ska en av latest vara med gårdagens väder
-// function getYesterday(lat, lon, timestamp) {
-//   $("body").ready(function () {
-//     var api_url = "http://api.openweathermap.org";
-//     var key = "936f2e7c80c5a35d539529f46f2c798b";
-//     let str = "/data/2.5/onecall/timemachine?";
-//     let url =
-//       api_url +
-//       str +
-//       "lat=" +
-//       lat +
-//       "&" +
-//       "lon=" +
-//       lon +
-//       "&" +
-//       "dt=" +
-//       timestamp +
-//       "&appid=" +
-//       key;
-//     $.ajax({
-//       url: url,
-//       type: "GET",
-//       success: function (result) {
-//         console.log(result);
-//         //skriv om
-//         let ul = document.getElementById("important-city-text");
-//         let img = document.createElement("img");
-//         let date = result.hourly[0].dt;
-//         let unix = new Date(date * 1000);
-//         let temp = parseFloat(result.hourly[0].temp) - 273; //hårdkodat
-//         ("<br></br>");
-//         ul.innerText = temp + " " + unix;
-//       },
-//     });
-//   });
-// }
+function getYesterday(name, lat, lon, timestamp) {
+  $("body").ready(function () {
+    var api_url = "http://api.openweathermap.org";
+    var key = "936f2e7c80c5a35d539529f46f2c798b";
+    let str = "/data/2.5/onecall/timemachine?";
+    let url =
+      api_url +
+      str +
+      "lat=" +
+      lat +
+      "&" +
+      "lon=" +
+      lon +
+      "&" +
+      "dt=" +
+      timestamp +
+      "&appid=" +
+      key;
+    $.ajax({
+      url: url,
+      type: "GET",
+      success: function (result) {
+        console.log(result);
+        //skriv om
+        let ul = document.getElementById("Yesterday-header");
+        let img = document.createElement("img");
+        let date = result.hourly[today.getHours()].dt;
+        let unix = new Date(date * 1000);
+        let cityname = result.name;
+        let temp = convertToCelsius(result.hourly[today.getHours()].temp);
+        let description =
+          result.hourly[today.getHours()].weather[0].description;
+        img.src = DayandNightIcon(today.getHours());
+        ul.innerText = name + " " + temp.toString() + "° C" + " " + time;
+        ul.appendChild(img);
+        let yesterdayreport = document.getElementById("Yesterday-Report");
+        let yesterdayimg = document.getElementById("yesterday-img");
+        let descrimg = document.createElement("img");
+        yesterdayreport.innerHTML = description;
+        descrimg.src = setLatestIcon(description);
+        yesterdayimg.appendChild(descrimg);
+      },
+    });
+  });
+}
 
 function Chart() {
   var chart = JSC.chart("chartDiv", {

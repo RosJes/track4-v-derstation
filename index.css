@@ -7,6 +7,9 @@
 #weatherimg {
   display: inline-block;
 }
+#yesterday-img {
+  display: inline-block;
+}
 #weather-cards {
   display: inline-block;
 }
