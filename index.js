@@ -1,17 +1,23 @@
 let yesterday = new Date(new Date().setDate(new Date().getDate() - 1));
+var today = new Date();
+var time = today.getHours() + ":0" + today.getMinutes();
+//Visar gårdagens väder i Stockholm per timme
 historyCast("59.33", "18.06", toTimestamp(yesterday.toString()));
 let counter = 0;
-// poser.style.display = "none";
 function todaysWeather() {
   var name = document.getElementById("inputLarge").value;
   var span = document.getElementById("namespan");
   span.textContent = name;
-  // let poser = document.getElementById("poser");
   let humid = document.getElementById("humid");
   let pressure = document.getElementById("Pressure");
   let feel = document.getElementById("Feel");
   let cityheader = document.getElementById("Weather");
   let waetherli = document.getElementById("weatherli");
+  let latestheader = document.getElementById("Latest-header");
+  let headerimg = document.createElement("IMG");
+  let weatherReport = document.getElementById("LatestWeatherReport");
+  var lastestWeatherimg = document.getElementById("weatherimg");
+  let imgtag = document.createElement("IMG");
   $(document).ready(function () {
     var api_url = "http://api.openweathermap.org/";
     var key = "936f2e7c80c5a35d539529f46f2c798b";
@@ -21,60 +27,39 @@ function todaysWeather() {
       dataType: "json",
       success: function (result) {
         console.log(result);
-        // historyCast(
+        //text till lastest spalten
+        headerimg.src = DayandNightIcon(
+          today.getHours(),
+          result.sys.sunset,
+          result.sys.sunrise
+        );
+
+        latestheader.innerText =
+          result.name +
+          " " +
+          convertToCelsius(result.main.temp) +
+          "° C " +
+          time;
+        latestheader.appendChild(headerimg);
+
+        weatherReport.innerHTML = result.weather[0].description;
+        imgtag.src = setLatestIcon(result.weather[0].description);
+        lastestWeatherimg.appendChild(imgtag);
+        console.log(imgtag.src);
+        // getYesterday(
         //   result.coord.lat,
         //   result.coord.lon,
         //   toTimestamp(yesterday.toString())
         // );
-        weatherSource = "";
         let ul = document.getElementById("list");
         let text = document.createTextNode(result.weather[0].description);
         let li = document.createElement("li");
         let img = document.createElement("img");
-        getYesterday(
-          result.coord.lat,
-          result.coord.lon,
-          toTimestamp(yesterday.toString())
-        );
-        if (span.length != 0) {
-          if (result.weather[0].description.includes("rain")) {
-            weatherSource =
-              "https://img.icons8.com/ios/50/000000/torrential-rain.png";
-          }
-          if (result.weather[0].description == "light rain") {
-            weatherSource =
-              "https://img.icons8.com/ios/50/000000/light-rain.png";
-          }
-          if (result.weather[0].description == "shower rain") {
-            weatherSource =
-              "https://img.icons8.com/ios/50/000000/intense-rain.png";
-          }
-          if (result.weather[0].description == "thunderstorm") {
-            weatherSource = "https://img.icons8.com/ios/50/000000/storm.png";
-          }
-          if (result.weather[0].description == "clear sky") {
-            weatherSource = "https://img.icons8.com/ios/50/000000/sun.png";
-          }
-          if (result.weather[0].description == "partly clouds") {
-            weatherSource =
-              "https://img.icons8.com/ios/50/000000/partly-cloudy-day.png";
-          }
 
-          if (result.weather[0].description.includes("snow")) {
-            weatherSource = "https://img.icons8.com/ios/50/000000/snow.png";
-          }
-          if (result.weather[0].description.includes("cloud")) {
-            weatherSource = "https://img.icons8.com/ios/50/000000/clouds.png";
-          }
-          if (
-            result.weather[0].description.includes("smoke") ||
-            result.weather[0].description.includes("haze")
-          ) {
-            weatherSource = "https://img.icons8.com/ios/48/000000/fog-day.png";
-          }
-          img.src = weatherSource;
+        if (span.length != 0) {
           cityheader.innerText =
             result.name + " " + convertToCelsius(result.main.temp) + "° C ";
+          img.src = setWeatherIcon(result.weather[0].description);
           li.appendChild(text);
           ul.appendChild(img);
           ul.appendChild(li);
@@ -101,9 +86,102 @@ function todaysWeather() {
     });
   });
 }
+
 function toTimestamp(strDate) {
   var datum = Date.parse(strDate);
   return datum / 1000;
+}
+//night or day icons
+function DayandNightIcon(time, sunset, sunrise) {
+  console.log("I am about to be a night or day icon");
+  let weatherSource = "";
+  if (time == sunrise || time < 19) {
+    weatherSource =
+      "https://img.icons8.com/ios/48/000000/partly-cloudy-day.png";
+  }
+  if (time == sunset || time > 19) {
+    weatherSource =
+      "https://img.icons8.com/ios/26/000000/partly-cloudy-night.png";
+  }
+  return weatherSource;
+}
+function setLatestIcon(description) {
+  console.log("I am to be an icon");
+  let weatherSource = "";
+  if (description.includes("rain")) {
+    weatherSource = "https://img.icons8.com/fluent/48/000000/intense-rain.png";
+  }
+  if (description == "light rain") {
+    weatherSource = "https://img.icons8.com/fluent/48/000000/light-rain.png";
+  }
+  if (description == "shower rain") {
+    weatherSource = "https://img.icons8.com/fluent/48/000000/downpour.png";
+  }
+  if (description == "thunderstorm") {
+    weatherSource = "https://img.icons8.com/fluent/48/000000/storm.png";
+  }
+  if (description == "clear sky") {
+    weatherSource = "https://img.icons8.com/fluent/48/000000/summer.png";
+  }
+  if (description == "partly clouds") {
+    weatherSource =
+      "https://img.icons8.com/fluent/48/000000/partly-cloudy-day.png";
+  }
+  if (description.includes("snow")) {
+    weatherSource = "https://img.icons8.com/fluent/48/000000/snow.png";
+  }
+  if (description.includes("cloud")) {
+    weatherSource = "https://img.icons8.com/fluent/48/000000/clouds.png";
+  }
+  if (description.includes("smoke") || description.includes("haze")) {
+    weatherSource = "https://img.icons8.com/fluent/48/000000/fog-day.png";
+  }
+  return weatherSource;
+}
+function setWeatherIcon(description) {
+  let weatherSource = "";
+  if (description.includes("rain")) {
+    weatherSource = "https://img.icons8.com/ios/50/000000/torrential-rain.png";
+  }
+  if (description == "light rain") {
+    weatherSource = "https://img.icons8.com/ios/50/000000/light-rain.png";
+  }
+  if (description == "shower rain") {
+    weatherSource = "https://img.icons8.com/ios/50/000000/intense-rain.png";
+  }
+  if (description == "thunderstorm") {
+    weatherSource = "https://img.icons8.com/ios/50/000000/storm.png";
+  }
+  if (description == "clear sky") {
+    weatherSource = "https://img.icons8.com/ios/50/000000/sun.png";
+  }
+  if (description == "partly clouds") {
+    weatherSource =
+      "https://img.icons8.com/ios/50/000000/partly-cloudy-day.png";
+  }
+  if (description.includes("snow")) {
+    weatherSource = "https://img.icons8.com/ios/50/000000/snow.png";
+  }
+  if (description.includes("cloud")) {
+    weatherSource = "https://img.icons8.com/ios/50/000000/clouds.png";
+  }
+  if (description.includes("smoke") || description.includes("haze")) {
+    weatherSource = "https://img.icons8.com/ios/48/000000/fog-day.png";
+  }
+  return weatherSource;
+}
+function changetoSunset() {
+  let sunsetcard = document.getElementById("sunsetcard");
+  let sunrisecard = document.getElementById("sunrisecard");
+  console.log("button clicked");
+  if (counter % 2 == 0) {
+    sunsetcard.style.display = "inline";
+    sunrisecard.style.display = "none";
+  } else {
+    sunsetcard.style.display = "none";
+    sunrisecard.style.display = "inline";
+  }
+  counter++;
 }
 function convertToCelsius(temp) {
   let convertCelsius = parseFloat(temp) - 273.5;
@@ -151,56 +229,43 @@ function historyCast(lat, lon, timestamp) {
     });
   });
 }
-function getYesterday(lat, lon, timestamp) {
-  $("body").ready(function () {
-    var api_url = "http://api.openweathermap.org";
-    var key = "936f2e7c80c5a35d539529f46f2c798b";
-    let str = "/data/2.5/onecall/timemachine?";
-    let url =
-      api_url +
-      str +
-      "lat=" +
-      lat +
-      "&" +
-      "lon=" +
-      lon +
-      "&" +
-      "dt=" +
-      timestamp +
-      "&appid=" +
-      key;
-    $.ajax({
-      url: url,
-      type: "GET",
-      success: function (result) {
-        console.log(result);
-        let ul = document.getElementById("important-city-text");
-        // let yesterdayweather = document.getElementById("Yesterdayweather");
-        // yesterdayweather.innerText = "Timezone: " + result.timezone;
-        let img = document.createElement("img");
-        let date = result.hourly[0].dt;
-        let unix = new Date(date * 1000);
-        let temp = parseFloat(result.hourly[0].temp) - 273; //hårdkodat
-        ("<br></br>");
-        ul.innerText = temp + " " + unix;
-      },
-    });
-  });
-}
-//BUNDET TILL KNAPP
-function changetoSunset() {
-  let sunsetcard = document.getElementById("sunsetcard");
-  let sunrisecard = document.getElementById("sunrisecard");
-  console.log("button clicked");
-  if (counter % 2 == 0) {
-    sunsetcard.style.display = "inline";
-    sunrisecard.style.display = "none";
-  } else {
-    sunsetcard.style.display = "none";
-    sunrisecard.style.display = "inline";
-  }
-  counter++;
-}
+//här ska en av latest vara med gårdagens väder
+// function getYesterday(lat, lon, timestamp) {
+//   $("body").ready(function () {
+//     var api_url = "http://api.openweathermap.org";
+//     var key = "936f2e7c80c5a35d539529f46f2c798b";
+//     let str = "/data/2.5/onecall/timemachine?";
+//     let url =
+//       api_url +
+//       str +
+//       "lat=" +
+//       lat +
+//       "&" +
+//       "lon=" +
+//       lon +
+//       "&" +
+//       "dt=" +
+//       timestamp +
+//       "&appid=" +
+//       key;
+//     $.ajax({
+//       url: url,
+//       type: "GET",
+//       success: function (result) {
+//         console.log(result);
+//         //skriv om
+//         let ul = document.getElementById("important-city-text");
+//         let img = document.createElement("img");
+//         let date = result.hourly[0].dt;
+//         let unix = new Date(date * 1000);
+//         let temp = parseFloat(result.hourly[0].temp) - 273; //hårdkodat
+//         ("<br></br>");
+//         ul.innerText = temp + " " + unix;
+//       },
+//     });
+//   });
+// }
+
 function Chart() {
   var chart = JSC.chart("chartDiv", {
     debug: true,

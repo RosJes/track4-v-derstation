@@ -55,37 +55,9 @@
         </form>
       </div>
     </nav>
-    <!-- <div id="important-city"class="card text-white bg-info mb-3" style="max-width: 20rem;">
-      <div class="card-header">Stockholm
-        <img src="https://img.icons8.com/ios/50/000000/partly-cloudy-night.png"/>
-      </div>
-      <div class="card-body">
-        <h4 class="card-title"> Stockholm 23° C 11:00 pm</h4>
-        <p class="card-text" id="important-city-text">
-          <img src="https://img.icons8.com/fluent/48/000000/cloud-lighting.png"/>
-        Thunder and moderate rain
-        </p>
-      </div>
-    </div>
-    <div id="important-city2"class="card text-white bg-info mb-3" style="max-width: 20rem;">
-      <div class="card-header">Linköping</div>
-      <div class="card-body">
-        <h4 class="card-title">Info card title</h4>
-        <p class="card-text" id="important-city-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      </div>
-    </div>
-  </div>
-  <div id="important-city3"class="card text-white bg-info mb-3" style="max-width: 20rem;">
-    <div class="card-header">Uppsala</div>
-    <div class="card-body">
-      <h4 class="card-title">Info card title</h4>
-      <p class="card-text" id="important-city-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    </div>
-  </div>
-</div>
-    ---->
+
     <div class="jumbotron">
-      <pclass="display-3">Latest:</p>
+      <p class="display-3">Latest:</p>
       <p class="lead"></p>
 
       <div class="list-group">
@@ -94,21 +66,15 @@
           class="list-group-item list-group-item-action flex-column align-items-start active"
         >
           <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">
+            <h5 class="mb-1" id="Latest-header">
               Stockholm 23° C 11:00 pm
-              <img
-                src="https://img.icons8.com/ios/50/000000/partly-cloudy-night.png"
-              />
             </h5>
             <small>Latest search</small>
           </div>
-          <p>
-            <img
-              src="https://img.icons8.com/fluent/48/000000/cloud-lighting.png"
-            />
-            Thunder and moderate rain
-          </p>
-          <small>Donec id elit non mi porta.</small>
+          <div id="weatherimg">
+            <img src="" />
+          </div>
+          <small id="LatestWeatherReport">partly cloudy</small>
         </a>
       </div>
       <div class="list-group">
@@ -119,12 +85,16 @@
           <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1">
               Your searched city 23° C 11:00 pm
-              <img src="https://img.icons8.com/ios/48/000000/partly-cloudy-day.png"/>
+              <img
+                src="https://img.icons8.com/ios/48/000000/partly-cloudy-day.png"
+              />
             </h5>
-            <small>Yesterday</small>
+            <small>latest search</small>
           </div>
           <p>
-            <img src="https://img.icons8.com/fluent/48/000000/partly-cloudy-day.png"/>
+            <img
+              src="https://img.icons8.com/fluent/48/000000/partly-cloudy-day.png"
+            />
             Thunder and moderate rain
           </p>
           <small>Donec id elit non mi porta.</small>
@@ -224,7 +194,6 @@
         </div>
       </div>
     </div>
-    -->
     <span id="namespan" style="display: none;">Name</span>
   </body>
 </html>

@@ -3,6 +3,9 @@
   padding-top: 25px;
   padding-right: 450px;
 }
+#weatherimg {
+  display: inline-block;
+}
 .blocks {
   padding-top: 25px;
   float: left;
