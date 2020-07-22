@@ -67,14 +67,14 @@
         >
           <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1" id="Latest-header">
-              Stockholm 23° C 11:00 pm
+              No searches
             </h5>
             <small>Latest search</small>
           </div>
           <div id="weatherimg">
             <img src="" />
           </div>
-          <small id="LatestWeatherReport">partly cloudy</small>
+          <small id="LatestWeatherReport">yet...</small>
         </a>
       </div>
       <div class="list-group">
@@ -83,86 +83,130 @@
           class="list-group-item list-group-item-action flex-column align-items-start active"
         >
           <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">
-              Your searched city 23° C 11:00 pm
-              <img
-                src="https://img.icons8.com/ios/48/000000/partly-cloudy-day.png"
-              />
+            <h5 class="mb-1" id="Yesterday-header">
+              No weather to show
             </h5>
-            <small>latest search</small>
+            <small>Latest search</small>
           </div>
-          <p>
-            <img
-              src="https://img.icons8.com/fluent/48/000000/partly-cloudy-day.png"
-            />
-            Thunder and moderate rain
-          </p>
-          <small>Donec id elit non mi porta.</small>
+          <div id="yesterday-img">
+            <img src="" />
+          </div>
+          <small id="Yesterday-Report">yet...</small>
         </a>
       </div>
-      <hr class="my-4" />
-      <div class="Input-form">
-        <div class="form-group">
-          <label class="col-form-label col-form-label-lg" for="inputLarge"
-            >Discover Today's weather in any city!</label
-          >
-          <input
-            class="form-control form-control-lg"
-            type="text"
-            placeholder="type city..."
-            id="inputLarge"
-          />
-          <button
-            id="commitbtn"
-            type="button"
-            class="btn btn-primary btn-lg btn-block"
-            onclick="todaysWeather()"
-          >
-            Click me!
-          </button>
-        </div>
-        <div id="weatherli">
-          <h1 id="Weather"></h1>
-          <ul id="list"></ul>
-        </div>
-      </div>
-
-      <div class="list-group" id="humidity">
-        <a
-          href="#"
-          class="list-group-item list-group-item-action active"
-          id="Pressure"
+    </div>
+    <hr class="my-4" />
+    <div class="Input-form">
+      <div class="form-group">
+        <label class="col-form-label col-form-label-lg" for="inputLarge"
+          >Discover Today's weather in any city!</label
         >
-          <img
-            src="https://img.icons8.com/android/24/000000/pressure.png"
-          />Pressure:
-        </a>
-        <a href="#" class="list-group-item list-group-item-action" id="humid"
-          ><img
-            src="https://img.icons8.com/metro/26/000000/humidity.png"
-          />Humidity:
-        </a>
-        <a
-          href="#"
-          class="list-group-item list-group-item-action disabled"
-          id="Feel"
-          >Feels like:
-        </a>
+        <input
+          class="form-control form-control-lg"
+          type="text"
+          placeholder="type city..."
+          id="inputLarge"
+        />
+        <button
+          id="commitbtn"
+          type="button"
+          class="btn btn-primary btn-lg btn-block"
+          onclick="todaysWeather()"
+        >
+          Click me!
+        </button>
       </div>
-      <div class="second-block" id="sunrisecard">
-        <div class="card border-primary mb-3" style="max-width: 20rem;">
-          <div class="card-header">
-            <img src="https://img.icons8.com/color/50/000000/sunrise.png" />
+      <div id="weatherli">
+        <h1 id="Weather"></h1>
+        <ul id="list"></ul>
+      </div>
+    </div>
+
+    <div class="list-group" id="humidity">
+      <a
+        href="#"
+        class="list-group-item list-group-item-action active"
+        id="Pressure"
+      >
+        <img
+          src="https://img.icons8.com/android/24/000000/pressure.png"
+        />Pressure:
+      </a>
+      <a href="#" class="list-group-item list-group-item-action" id="humid"
+        ><img
+          src="https://img.icons8.com/metro/26/000000/humidity.png"
+        />Humidity:
+      </a>
+      <a
+        href="#"
+        class="list-group-item list-group-item-action disabled"
+        id="Feel"
+        >Feels like:
+      </a>
+    </div>
+
+    <!-- <div class="second-block" id="sunrisecard">
+          <div class="card border-primary mb-3" style="max-width: 20rem;">
+            <div class="card-header">
+              <img src="https://img.icons8.com/color/50/000000/sunrise.png" />
+            </div>
+            <div class="card-body">
+              <h4 class="card-title">When does the sun rise?</h4>
+              <p
+                class="card-text"
+                id="sunrise"
+                placeholder="When does the sun rise?"
+              ></p>
+            </div>
+            <button
+              type="button"
+              onclick="changetoSunset()"
+              class="btn btn-outline-primary"
+            >
+              turn off
+            </button>
           </div>
-          <div class="card-body">
-            <h4 class="card-title">When does the sun rise?</h4>
-            <p
-              class="card-text"
-              id="sunrise"
-              placeholder="When does the sun rise?"
-            ></p>
+        </div>
+        <div class="blocks" id="sunsetcard">
+          <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
+            <div class="card-header">
+              <img src="https://img.icons8.com/color/50/000000/sunset.png" />
+            </div>
+            <div class="card-body">
+              <h4 class="card-title">When does the sun set?</h4>
+              <p
+                class="card-text"
+                id="sunset"
+                placeholder="When does the sun set?"
+              ></p>
+            </div>
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              onclick="changetoSunset()"
+            >
+              turn on
+            </button>
           </div>
+        </div>
+      </div>
+    </div> -->
+    <div class="flex-container">
+      <div id="sunrise">
+        <div class="card-body">
+          <h4 class="card-title">
+            <img src="https://img.icons8.com/color/50/000000/sunset.png" />When
+            does the sun set?
+          </h4>
+          <p
+            class="card-text"
+            id="sunrise-text"
+            placeholder="When does the sun set?"
+          >
+            Sunsrise at 5 am
+          </p>
           <button
+            id="sunbtn"
             type="button"
             onclick="changetoSunset()"
             class="btn btn-outline-primary"
@@ -171,26 +215,25 @@
           </button>
         </div>
       </div>
-      <div class="blocks" id="sunsetcard">
-        <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
-          <div class="card-header">
-            <img src="https://img.icons8.com/color/50/000000/sunset.png" />
-          </div>
+      <div>
+        <div>
           <div class="card-body">
-            <h4 class="card-title">When does the sun set?</h4>
-            <p
-              class="card-text"
-              id="sunset"
-              placeholder="When does the sun set?"
-            ></p>
+            <h4 class="card-title">
+              <img src="https://img.icons8.com/color/48/000000/wind.png" />Wind
+              speed
+            </h4>
           </div>
-          <button
-            type="button"
-            class="btn btn-outline-secondary"
-            onclick="changetoSunset()"
-          >
-            turn on
-          </button>
+        </div>
+      </div>
+      <div>
+        <div>
+          <div class="card-body">
+            <h4 class="card-title">
+              <img
+                src="https://img.icons8.com/color/48/000000/clouds.png"
+              />Clouds
+            </h4>
+          </div>
         </div>
       </div>
     </div>

@@ -95,13 +95,13 @@ function toTimestamp(strDate) {
 function DayandNightIcon(time, sunset, sunrise) {
   console.log("I am about to be a night or day icon");
   let weatherSource = "";
-  if (time == sunrise || time < 19) {
+  if (time == sunrise || time <= 19) {
     weatherSource =
       "https://img.icons8.com/ios/48/000000/partly-cloudy-day.png";
   }
-  if (time == sunset || time > 19) {
+  if (time == sunset || time >= 19) {
     weatherSource =
-      "https://img.icons8.com/ios/26/000000/partly-cloudy-night.png";
+      "https://img.icons8.com/ios/48/000000/partly-cloudy-night.png";
   }
   return weatherSource;
 }
@@ -171,15 +171,13 @@ function setWeatherIcon(description) {
   return weatherSource;
 }
 function changetoSunset() {
-  let sunsetcard = document.getElementById("sunsetcard");
-  let sunrisecard = document.getElementById("sunrisecard");
+  let sunrisecard = document.getElementById("sunrise");
+  let sunbtn = document.getElementById("sunbtn");
   console.log("button clicked");
   if (counter % 2 == 0) {
-    sunsetcard.style.display = "inline";
-    sunrisecard.style.display = "none";
+    sunrisecard.style.background = "white";
   } else {
-    sunsetcard.style.display = "none";
-    sunrisecard.style.display = "inline";
+    sunrisecard.style.background = "black";
   }
   counter++;
 }
