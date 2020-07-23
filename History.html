@@ -62,7 +62,7 @@
       <h1 id="Yesterdayweather"></h1>
       <!-- <ul id="HistoryCast"></ul> -->
       <hr class="my-4" />
-      <p class="lead"></p>
+      <p class="lead" id="Date"></p>
     </div>
     <div class="container">
       <canvas id="history-chart"></canvas>
@@ -77,13 +77,13 @@
             datasets: [
               {
                 data: dataarray,
-                label: "Weather yesterday ° K per hour",
+                label: "° K per hour",
                 borderColor: "#3e95cd",
                 fill: false,
               },
               {
                 data: dataarray2,
-                label: "Weather yesterday ° C per hour",
+                label: "° C per hour",
                 borderColor: "#3e95cd",
                 fill: false,
               },
@@ -91,7 +91,8 @@
           },
         });
       }
-      historyCast("59.33", "18.06", toTimestamp(yesterday.toString()));
+      // historyCast("59.33", "18.06", toTimestamp(yesterday.toString()));
+      historyCast("47.5", "19.04", toTimestamp(yesterday.toString()));
       function historyCast(lat, lon, timestamp) {
         console.log("The weather is:");
         let temp;
@@ -125,8 +126,9 @@
               let yesterdayweather = document.getElementById(
                 "Yesterdayweather"
               );
-
+              let yesterdate = document.getElementById("Date");
               yesterdayweather.innerText = "Timezone: " + result.timezone;
+              yesterdate.innerText = yesterday.toString();
               for (let i = 0; i < result.hourly.length; i++) {
                 // let li = document.createElement("li");
                 // let img = document.createElement("img");
