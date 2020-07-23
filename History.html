@@ -9,10 +9,9 @@
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
     />
-    <script src="chart.js"></script>
-    <script src="index.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+    <script src="index.js"></script>
     <title>Document</title>
   </head>
   <body>
@@ -59,43 +58,33 @@
         </form>
       </div>
     </nav>
-    <ul id="HistoryCast"></ul>
     <div class="jumbotron">
       <h1 id="Yesterdayweather"></h1>
-
+      <ul id="HistoryCast"></ul>
       <hr class="my-4" />
       <p class="lead"></p>
     </div>
-
     <div class="container">
       <canvas id="history-chart"></canvas>
     </div>
     <script>
-      let chart = document.getElementById("history-chart").getContext("2d");
-      let weatherChart = new Chart(chart, {
-        type: "bar",
+      // Our labels along the x-axis
+      var years = [1500, 1600, 1700, 1750, 1800, 1850, 1900, 1950, 1999, 2050];
+      // For drawing the lines
+      var africa = [86, 114, 106, 106, 107, 111, 133, 221, 783, 2478];
+
+      var ctx = document.getElementById("history-chart");
+      var myChart = new Chart(ctx, {
+        type: "line",
         data: {
-          labels: [
-            "hour 1",
-            "hour 2",
-            "hour 3",
-            "hour 4",
-            "hour 5",
-            "hour 6",
-            "hour 7",
-            "hour 8",
-          ],
+          labels: years,
           datasets: [
             {
-              label: "Weather in Celsius",
-              data: [19, 18, 17, 16, 15, 14, 13, 13],
-              backgoundColor: "green",
+              data: africa,
             },
           ],
         },
-        options: {},
       });
-      // '° C'
     </script>
   </body>
 </html>

@@ -1,0 +1,66 @@
+function chart(labelarray, dataarray) {
+        let chart = document.getElementById("history-chart").getContext("2d");
+        let weatherChart = new Chart(chart, {
+          type: "line",
+          data: {
+            labels: [labelarray],
+            datasets: [{ dataarray }],
+          },
+          options: {},
+        });
+      }
+      historyCast("59.33", "18.06", toTimestamp(yesterday.toString()));
+      function historyCast(lat, lon, timestamp) {
+        console.log("The weather is:");
+        let temp;
+        let temparr = [];
+        let dayarr = [];
+        // let i = new Date().getUTCHours();
+        $("body").ready(function () {
+          var api_url = "http://api.openweathermap.org";
+          var key = "936f2e7c80c5a35d539529f46f2c798b";
+          let str = "/data/2.5/onecall/timemachine?";
+          let url =
+            api_url +
+            str +
+            "lat=" +
+            lat +
+            "&" +
+            "lon=" +
+            lon +
+            "&" +
+            "dt=" +
+            timestamp +
+            "&appid=" +
+            key;
+          $.ajax({
+            url: url,
+            type: "GET",
+            success: function (result) {
+              console.log(result);
+              let ul = document.getElementById("HistoryCast");
+              let yesterdayweather = document.getElementById(
+                "Yesterdayweather"
+              );
+
+              yesterdayweather.innerText = "Timezone: " + result.timezone;
+              for (let i = 0; i < result.hourly.length; i++) {
+                let li = document.createElement("li");
+                let img = document.createElement("img");
+                let date = result.hourly[i].dt;
+                let unix = new Date(date * 1000);
+                temp = convertToCelsius(result.hourly[i].temp);
+                temparr.push(temp + "° C" + ",");
+                dayarr.push(i.toString() + ",");
+                li.innerHTML = temp + "° C";
+                ("<br></br>");
+                ul.appendChild(li);
+                chart(temparr, dayarr);
+              }
+              dayarr.forEach((element) => {
+                console.log(element);
+              });
+            },
+          });
+        });
+      }

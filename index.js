@@ -3,9 +3,12 @@ var today = new Date();
 var time = "";
 if (today.getMinutes() < 10)
   time = today.getHours() + ":0" + today.getMinutes();
-else time = today.getHours() + ":" + today.getMinutes();
+else {
+  time = today.getHours() + ":" + today.getMinutes();
+}
+
 //Visar gårdagens väder i Stockholm per timme
-historyCast("59.33", "18.06", toTimestamp(yesterday.toString()));
+
 let counter = 0;
 function todaysWeather() {
   var name = document.getElementById("inputLarge").value;
@@ -53,7 +56,6 @@ function todaysWeather() {
         let text = document.createTextNode(result.weather[0].description);
         let li = document.createElement("li");
         let img = document.createElement("img");
-
         if (span.length != 0) {
           cityheader.innerText =
             result.name + " " + convertToCelsius(result.main.temp) + "° C ";
@@ -219,48 +221,7 @@ function convertToCelsius(temp) {
   let convertCelsius = parseFloat(temp) - 273.5;
   return (convertCelsius = Math.round(convertCelsius));
 }
-function historyCast(lat, lon, timestamp) {
-  console.log("The weather is:");
 
-  $("body").ready(function () {
-    var api_url = "http://api.openweathermap.org";
-    var key = "936f2e7c80c5a35d539529f46f2c798b";
-    let str = "/data/2.5/onecall/timemachine?";
-    let url =
-      api_url +
-      str +
-      "lat=" +
-      lat +
-      "&" +
-      "lon=" +
-      lon +
-      "&" +
-      "dt=" +
-      timestamp +
-      "&appid=" +
-      key;
-    $.ajax({
-      url: url,
-      type: "GET",
-      success: function (result) {
-        console.log(result);
-        let ul = document.getElementById("HistoryCast");
-        let yesterdayweather = document.getElementById("Yesterdayweather");
-        yesterdayweather.innerText = "Timezone: " + result.timezone;
-        for (var i = new Date().getUTCHours(); i < result.hourly.length; i++) {
-          let li = document.createElement("li");
-          let img = document.createElement("img");
-          let date = result.hourly[i].dt;
-          let unix = new Date(date * 1000);
-          let temp = convertToCelsius(result.hourly[i].temp);
-          li.innerHTML = temp + "° C";
-          ("<br></br>");
-          ul.appendChild(li);
-        }
-      },
-    });
-  });
-}
 //här ska en av latest vara med gårdagens väder
 function getYesterday(name, lat, lon, timestamp) {
   $("body").ready(function () {
