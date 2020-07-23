@@ -1,6 +1,9 @@
 let yesterday = new Date(new Date().setDate(new Date().getDate() - 1));
 var today = new Date();
-var time = today.getHours() + ":0" + today.getMinutes();
+var time = "";
+if (today.getMinutes() < 10)
+  time = today.getHours() + ":0" + today.getMinutes();
+else time = today.getHours() + ":" + today.getMinutes();
 //Visar gårdagens väder i Stockholm per timme
 historyCast("59.33", "18.06", toTimestamp(yesterday.toString()));
 let counter = 0;
@@ -68,21 +71,29 @@ function todaysWeather() {
           commitbtn.style.display = "none";
           span.innerText = " ";
         }
-
+        var wind = document.getElementById("wind");
+        var cloud = document.getElementById("cloud");
+        //gör en metod av sunrisecard
         var spansunrise = document.getElementById("sunrise-span");
         let sunrisecard = document.getElementById("sunrise");
         var spansunset = document.getElementById("sunset");
         let cardheadersunrise = document.getElementById("sunrise-text");
+        let cardheaderwind = document.getElementById("wind-text");
         sunrisecard.style.display = "inline";
+        wind.style.display = "inline";
+        // cloud.style.display = "inline";
         // cardheadersunrise.innerText = datesunrise;
         let sunrise = result.sys.sunrise;
         let sunset = result.sys.sunset;
         let datesunrise = new Date(sunrise * 1000);
         let datesunset = new Date(sunset * 1000);
+        cardheaderwind.innerHTML =
+          "Deg:" + result.wind.deg + "<br/>" + " Speed:" + result.wind.speed;
         if (sunrisecard.style.background == "#f1f1f1")
           cardheadersunrise.innerText = spansunrise.textContent;
         else if ((sunrisecard.style.background = "black"))
           sunrisecard.style.color = "white";
+
         cardheadersunrise.innerText = spansunset.textContent;
         spansunset.textContent = datesunset;
         spansunrise.textContent = datesunrise;
@@ -294,39 +305,5 @@ function getYesterday(name, lat, lon, timestamp) {
         yesterdayimg.appendChild(descrimg);
       },
     });
-  });
-}
-
-function Chart() {
-  var chart = JSC.chart("chartDiv", {
-    debug: true,
-    type: "line",
-    title_label_text: "Line Series Types",
-    legend_position: "inside bottom right",
-    toolbar_items: {
-      "Line Type": {
-        type: "select",
-        label_style_fontSize: 13,
-        margin: 5,
-        items: "Line,Step,Spline",
-        events_change: function (val) {
-          chart.series().options({ type: val });
-        },
-      },
-    },
-    xAxis: { scale_type: "time" },
-    series: [
-      {
-        name: "Purchases",
-        points: [
-          ["1/1/2020", 29.9],
-          ["1/2/2020", 71.5],
-          ["1/3/2020", 106.4],
-          ["1/6/2020", 129.2],
-          ["1/7/2020", 144.0],
-          ["1/8/2020", 176.0],
-        ],
-      },
-    ],
   });
 }

@@ -5,8 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="bootstrap-sand.css.css" />
     <link rel="stylesheet" type="text/css" href="index.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    />
+    <script src="chart.js"></script>
     <script src="index.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
     <title>Document</title>
   </head>
   <body>
@@ -53,15 +59,43 @@
         </form>
       </div>
     </nav>
+    <ul id="HistoryCast"></ul>
     <div class="jumbotron">
-              <h1 id="Yesterdayweather"></h1>
-              <ul id="HistoryCast"></ul>
-        <!-- <h1 class="display-3">Hello, world!</h1> -->
-        <hr class="my-4">
-        <p class="lead">
-        </p>
-       
-      </body>
-    </html>
-    
-   
+      <h1 id="Yesterdayweather"></h1>
+
+      <hr class="my-4" />
+      <p class="lead"></p>
+    </div>
+
+    <div class="container">
+      <canvas id="history-chart"></canvas>
+    </div>
+    <script>
+      let chart = document.getElementById("history-chart").getContext("2d");
+      let weatherChart = new Chart(chart, {
+        type: "bar",
+        data: {
+          labels: [
+            "hour 1",
+            "hour 2",
+            "hour 3",
+            "hour 4",
+            "hour 5",
+            "hour 6",
+            "hour 7",
+            "hour 8",
+          ],
+          datasets: [
+            {
+              label: "Weather in Celsius",
+              data: [19, 18, 17, 16, 15, 14, 13, 13],
+              backgoundColor: "green",
+            },
+          ],
+        },
+        options: {},
+      });
+      // '° C'
+    </script>
+  </body>
+</html>
