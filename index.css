@@ -54,20 +54,21 @@
   background-color: #f1f1f1;
   border: solid 0.5px;
   border-color: rgb(163, 163, 175);
-  width: 1000px;
+  width: 300px;
   margin: 10px;
   text-align: center;
-  line-height: 175px;
+  line-height: 25px;
   font-size: 10px;
 }
 #sunrise {
   border-radius: 5px;
-  background-color: #000000;
+  background-color: #f1f1f1;
   border: solid 0.5px;
   border-color: rgb(163, 163, 175);
-  width: 1000px;
+  width: 300px;
   margin: 10px;
   text-align: center;
-  line-height: 75px;
+  line-height: 25px;
   font-size: 10px;
+  display: none;
 }

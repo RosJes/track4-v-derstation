@@ -68,18 +68,56 @@ function todaysWeather() {
           commitbtn.style.display = "none";
           span.innerText = " ";
         }
-        // let sunrise = result.sys.sunrise;
-        // let sunset = result.sys.sunset;
-        // let datesunrise = new Date(sunrise * 1000);
-        // let datesunset = new Date(sunset * 1000);
 
-        // let cardheadersunset = document.getElementById("sunset");
-        // let cardheadersunrise = document.getElementById("sunrise");
+        var spansunrise = document.getElementById("sunrise-span");
+        let sunrisecard = document.getElementById("sunrise");
+        var spansunset = document.getElementById("sunset");
+        let cardheadersunrise = document.getElementById("sunrise-text");
+        sunrisecard.style.display = "inline";
         // cardheadersunrise.innerText = datesunrise;
-        // cardheadersunset.innerText = datesunset;
+        let sunrise = result.sys.sunrise;
+        let sunset = result.sys.sunset;
+        let datesunrise = new Date(sunrise * 1000);
+        let datesunset = new Date(sunset * 1000);
+        if (sunrisecard.style.background == "#f1f1f1")
+          cardheadersunrise.innerText = spansunrise.textContent;
+        else if ((sunrisecard.style.background = "black"))
+          sunrisecard.style.color = "white";
+        cardheadersunrise.innerText = spansunset.textContent;
+        spansunset.textContent = datesunset;
+        spansunrise.textContent = datesunrise;
+
+        // cardheadersunrise.innerText = datesunset;
       },
     });
   });
+}
+function changetoSunset() {
+  let sunrisecard = document.getElementById("sunrise");
+  let sunimg = document.createElement("img");
+  let sunsetheader = document.getElementById("sunrise-title");
+  let cardheadersunrise = document.getElementById("sunrise-text");
+  var spansunset = document.getElementById("sunset");
+  var spansunrise = document.getElementById("sunrise-span");
+  let source = "";
+  let sunbtn = document.getElementById("sunbtn");
+  console.log("button clicked");
+  if (counter % 2 == 0) {
+    sunrisecard.style.background = "#f1f1f1";
+    cardheadersunrise.innerText = spansunrise.textContent;
+    sunsetheader.innerText = "When does the sun set?";
+    sunrisecard.style.color = "black";
+    source = "https://img.icons8.com/color/50/000000/sunset.png";
+  } else {
+    sunrisecard.style.background = "black";
+    sunrisecard.style.color = "#f1f1f1";
+    source = "https://img.icons8.com/color/48/000000/sunrise.png";
+    sunsetheader.innerText = "When does the sun rise?";
+    cardheadersunrise.innerText = spansunset.textContent;
+  }
+  sunimg.src = source;
+  sunsetheader.appendChild(sunimg);
+  counter++;
 }
 
 function toTimestamp(strDate) {
@@ -165,17 +203,7 @@ function setWeatherIcon(description) {
   }
   return weatherSource;
 }
-function changetoSunset() {
-  let sunrisecard = document.getElementById("sunrise");
-  let sunbtn = document.getElementById("sunbtn");
-  console.log("button clicked");
-  if (counter % 2 == 0) {
-    sunrisecard.style.background = "white";
-  } else {
-    sunrisecard.style.background = "black";
-  }
-  counter++;
-}
+
 function convertToCelsius(temp) {
   let convertCelsius = parseFloat(temp) - 273.5;
   return (convertCelsius = Math.round(convertCelsius));
