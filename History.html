@@ -68,7 +68,7 @@
       <canvas id="history-chart"></canvas>
     </div>
     <script>
-      function chart(labelarray, dataarray) {
+      function chart(labelarray, dataarray, dataarray2) {
         var ctx = document.getElementById("history-chart");
         var myChart = new Chart(ctx, {
           type: "line",
@@ -78,6 +78,14 @@
               {
                 data: dataarray,
                 label: "Weather yesterday ° K per hour",
+                borderColor: "#3e95cd",
+                fill: false,
+              },
+              {
+                data: dataarray2,
+                label: "Weather yesterday ° C per hour",
+                borderColor: "#3e95cd",
+                fill: false,
               },
             ],
           },
@@ -89,6 +97,7 @@
         let temp;
         let temparr = [];
         let dayarr = [];
+        let celstemparr = [];
         // let i = new Date().getUTCHours();
         $("body").ready(function () {
           var api_url = "http://api.openweathermap.org";
@@ -122,14 +131,16 @@
                 // let li = document.createElement("li");
                 // let img = document.createElement("img");
                 let date = result.hourly[i].dt;
-                let unix = new Date(date * 1000).getHours();
+                let unix = new Date(date * 1000);
                 temp = convertToCelsius(result.hourly[i].temp);
                 temparr.push(result.hourly[i].temp);
-                dayarr.push(unix);
+                dayarr.push(unix.getUTCHours() + ":00");
+                celstemparr.push(temp);
                 // li.innerHTML = temp + "° C";
                 ("<br></br>");
+
                 // ul.appendChild(li);
-                chart(dayarr, temparr);
+                chart(dayarr, temparr, celstemparr);
               }
             },
           });
