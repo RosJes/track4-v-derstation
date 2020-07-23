@@ -60,7 +60,7 @@
     </nav>
     <div class="jumbotron">
       <h1 id="Yesterdayweather"></h1>
-      <ul id="HistoryCast"></ul>
+      <!-- <ul id="HistoryCast"></ul> -->
       <hr class="my-4" />
       <p class="lead"></p>
     </div>
@@ -68,23 +68,73 @@
       <canvas id="history-chart"></canvas>
     </div>
     <script>
-      // Our labels along the x-axis
-      var years = [1500, 1600, 1700, 1750, 1800, 1850, 1900, 1950, 1999, 2050];
-      // For drawing the lines
-      var africa = [86, 114, 106, 106, 107, 111, 133, 221, 783, 2478];
+      function chart(labelarray, dataarray) {
+        var ctx = document.getElementById("history-chart");
+        var myChart = new Chart(ctx, {
+          type: "line",
+          data: {
+            labels: labelarray,
+            datasets: [
+              {
+                data: dataarray,
+                label: "Weather hourly yesterday",
+              },
+            ],
+          },
+        });
+      }
+      historyCast("59.33", "18.06", toTimestamp(yesterday.toString()));
+      function historyCast(lat, lon, timestamp) {
+        console.log("The weather is:");
+        let temp;
+        let temparr = [];
+        let dayarr = [];
+        // let i = new Date().getUTCHours();
+        $("body").ready(function () {
+          var api_url = "http://api.openweathermap.org";
+          var key = "936f2e7c80c5a35d539529f46f2c798b";
+          let str = "/data/2.5/onecall/timemachine?";
+          let url =
+            api_url +
+            str +
+            "lat=" +
+            lat +
+            "&" +
+            "lon=" +
+            lon +
+            "&" +
+            "dt=" +
+            timestamp +
+            "&appid=" +
+            key;
+          $.ajax({
+            url: url,
+            type: "GET",
+            success: function (result) {
+              console.log(result);
+              // let ul = document.getElementById("HistoryCast");
+              let yesterdayweather = document.getElementById(
+                "Yesterdayweather"
+              );
 
-      var ctx = document.getElementById("history-chart");
-      var myChart = new Chart(ctx, {
-        type: "line",
-        data: {
-          labels: years,
-          datasets: [
-            {
-              data: africa,
+              yesterdayweather.innerText = "Timezone: " + result.timezone;
+              for (let i = 0; i < result.hourly.length; i++) {
+                // let li = document.createElement("li");
+                // let img = document.createElement("img");
+                let date = result.hourly[i].dt;
+                let unix = new Date(date * 1000).getHours();
+                temp = convertToCelsius(result.hourly[i].temp);
+                temparr.push(temp);
+                dayarr.push(unix);
+                // li.innerHTML = temp + "° C";
+                ("<br></br>");
+                // ul.appendChild(li);
+                chart(dayarr, temparr);
+              }
             },
-          ],
-        },
-      });
+          });
+        });
+      }
     </script>
   </body>
 </html>

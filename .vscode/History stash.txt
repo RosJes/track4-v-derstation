@@ -57,8 +57,7 @@ function chart(labelarray, dataarray) {
                 ul.appendChild(li);
                 chart(temparr, dayarr);
               }
-              dayarr.forEach((element) => {
-                console.log(element);
+             
               });
             },
           });
