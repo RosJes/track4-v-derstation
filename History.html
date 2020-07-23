@@ -77,7 +77,7 @@
             datasets: [
               {
                 data: dataarray,
-                label: "Weather yesterday ° C per hour",
+                label: "Weather yesterday ° K per hour",
               },
             ],
           },
@@ -124,7 +124,7 @@
                 let date = result.hourly[i].dt;
                 let unix = new Date(date * 1000).getHours();
                 temp = convertToCelsius(result.hourly[i].temp);
-                temparr.push(temp);
+                temparr.push(result.hourly[i].temp);
                 dayarr.push(unix);
                 // li.innerHTML = temp + "° C";
                 ("<br></br>");
