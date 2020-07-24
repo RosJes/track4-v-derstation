@@ -218,7 +218,7 @@ function setWeatherIcon(description) {
 }
 
 function convertToCelsius(temp) {
-  let convertCelsius = parseFloat(temp) - 273.5;
+  let convertCelsius = parseFloat(temp) - 273.15;
   return (convertCelsius = Math.round(convertCelsius));
 }
 
